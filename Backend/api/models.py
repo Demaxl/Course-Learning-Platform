@@ -11,10 +11,13 @@ class User(AbstractUser):
     is_student = models.BooleanField(default=True)
     
     def enroll(self, course: 'Course'):
-        course.students.add(self)
+        return Enrollment.objects.create(
+            student=self,
+            course=course)
     
     def unenroll(self, course: 'Course'):
         course.students.remove(self)
+
 
         
 class Course(models.Model):
@@ -84,7 +87,7 @@ class Progress(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
     class Meta:
-        constraints = [\
+        constraints = [
             UniqueConstraint(fields=["student", "course", "lesson"], name="unique_progress")
             ]
     
