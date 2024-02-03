@@ -140,7 +140,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1), # TODO # set to short
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=30), # TODO # set to short
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30), # TODO # set to long
 }
 
@@ -149,6 +149,7 @@ DJOSER = {
     "SERIALIZERS": {
         "user": "api.serializers.CustomUserSerializer",
         "user_create": 'api.serializers.CustomUserCreateSerializer',
+        "current_user": "api.serializers.CustomUserSerializer"
     }
 }
 

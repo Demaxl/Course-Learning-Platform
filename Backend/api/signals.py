@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from .models import *
 
@@ -7,16 +7,25 @@ from .models import *
 # instance: the model instance that was saved
 # created: a boolean that tells whether it created a new instance or just updated one
 
-@receiver(signal=post_save, sender=Progress)
-def checkCourseComplete(sender, instance :Progress, created, **kwargs):
-    if created:
-        enrollment = instance.getEnrollment()
+@receiver(signal=[post_save, post_delete], sender=Progress)
+def checkCourseComplete(sender, **kwargs):
+    if kwargs.get("created", False):
+        enrollment = kwargs['instance'].getEnrollment()
         completed, total = enrollment.getProgress()
 
         if completed == total:
             enrollment.is_complete = True
             enrollment.save()
+    else:
+        enrollment = kwargs['instance'].getEnrollment()
+        completed, total = enrollment.getProgress()
 
+        if completed != total:
+            enrollment.is_complete = False
+            enrollment.save()
+    
+
+    
 
 
 

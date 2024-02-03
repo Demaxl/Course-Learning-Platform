@@ -27,4 +27,17 @@ class CourseTestCase(TestCase):
 
         cls.enrollment = cls.student.enroll(cls.course)
 
-    
+    def testCourseComplete(self):
+        """ Test to mark a course as complete if all its lessons are complete """
+        self.lesson1.complete(self.student)
+        self.lesson2.complete(self.student)
+
+        enrollment = self.student.enrollments.get(course=self.course)
+        
+        self.assertEqual(enrollment.is_complete, True)
+
+        Progress.objects.get(lesson=self.lesson2).delete()
+
+        enrollment = self.student.enrollments.get(course=self.course)
+        
+        self.assertEqual(enrollment.is_complete, False)
