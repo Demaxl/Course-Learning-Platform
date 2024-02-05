@@ -37,7 +37,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "Micheal",
+									"value": "brian",
 									"type": "text"
 								},
 								{
@@ -685,9 +685,6 @@
 							"id": "46664539-0ad9-413e-994f-99e976f1329a",
 							"name": "User already exists",
 							"originalRequest": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -772,9 +769,6 @@
 							"id": "d08df1c6-a188-43d2-ac41-3ab46a48fad1",
 							"name": "Weak Password",
 							"originalRequest": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -859,9 +853,6 @@
 							"id": "3f75b293-c5bd-4304-a677-a30a89110cf8",
 							"name": "Successfull Student Created",
 							"originalRequest": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -946,9 +937,6 @@
 							"id": "4003c842-3558-4288-b4ff-632536d1d028",
 							"name": "Successfull Instructor Created",
 							"originalRequest": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1033,9 +1021,6 @@
 							"id": "88228dff-1b75-4b5d-8f92-1e0cdd899011",
 							"name": "Invalid Account Type",
 							"originalRequest": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1181,14 +1166,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/auth/users/",
+							"raw": "{{BASE_URL}}/auth/users/me",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"auth",
 								"users",
-								""
+								"me"
 							]
 						}
 					},
@@ -1196,7 +1181,665 @@
 				}
 			],
 			"id": "84279035-d210-4a68-8bfa-e95322a5b2e0",
-			"description": "Requests of users"
+			"description": "User related endpoints"
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Get course list",
+					"id": "6508b445-c381-44a6-80a5-2f9c13e92f31",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "8dbe7bc9-df47-4e21-bb2d-1d317bfb65b3",
+							"name": "Get course detail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:10:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"instructor\": \"Micheal\",\n    \"title\": \"Introduction to Backend Development with python\",\n    \"created_at\": \"2024-01-25T15:59:16.501048+01:00\",\n    \"description\": \"This is an introductory backend course\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Course",
+					"id": "5b0f0884-8299-4190-ae9b-eff98b8a3e73",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT ",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Machine learning for beginners",
+									"description": "Course title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is a course for beginners in Machine Learning",
+									"description": "Description of the course",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "308f1e63-1529-4dc3-8104-cb03834d89f3",
+							"name": "Student tries to create course",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Machine learning for beginners",
+											"description": "Course title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "This is a course for beginners in Machine Learning",
+											"description": "Description of the course",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:00:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Only instructors are allowed\"\n}"
+						},
+						{
+							"id": "1f97e67c-378e-47b4-828f-d127c0e358b5",
+							"name": "Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Machine learning for beginners",
+											"description": "Course title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "This is a course for beginners in Machine Learning",
+											"description": "Description of the course",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:02:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 7,\n    \"instructor\": \"Micheal\",\n    \"title\": \"Machine learning for beginners\",\n    \"created_at\": \"2024-02-04T01:02:38.613247+01:00\",\n    \"description\": \"This is a course for beginners in Machine Learning\"\n}"
+						},
+						{
+							"id": "8fbe55e5-42bd-4d69-89fa-a1f7f0427cd3",
+							"name": "Unauthenticated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Machine learning for beginners",
+											"description": "Course title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "This is a course for beginners in Machine Learning",
+											"description": "Description of the course",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:06:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "JWT realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Authentication credentials were not provided.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit course detail",
+					"id": "b6675517-0b33-47ac-aa7f-9b25caa9912a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{INSTRUCTOR_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Introduction to Backend Development with python",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b6e0067a-8e6e-4cbe-af98-1180b3392f74",
+							"name": "Invalid course instructor",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introduction to Backend Development with python",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 05 Feb 2024 15:37:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Only the instructor of this course can edit it\"\n}"
+						},
+						{
+							"id": "374ce421-217f-470c-9c24-32fc21a2082f",
+							"name": "Successfull",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introduction to Backend Development with python",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 05 Feb 2024 15:38:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"instructor\": \"Micheal\",\n    \"title\": \"Introduction to Backend Development with python\",\n    \"created_at\": \"2024-01-25T15:59:16.501048+01:00\",\n    \"description\": \"This is an introductory backend course\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Course",
+					"id": "61393a00-4eff-48b2-abb8-96b499c78f49",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{INSTRUCTOR_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/7",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c077329b-8b83-4c14-b151-285174f38c69",
+			"description": "Requests for course resources"
 		}
 	]
 }
