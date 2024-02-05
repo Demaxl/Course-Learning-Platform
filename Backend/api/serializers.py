@@ -1,10 +1,9 @@
 import bleach
+
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
+
 from .models import *
-
-
-
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -13,6 +12,8 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ["id", "instructor", "title", "created_at", "description"]
+
+
 
 class EnrollmentSerializer(serializers.ModelSerializer):
     total_lessons = serializers.SerializerMethodField()

@@ -41,3 +41,19 @@ class CourseTestCase(TestCase):
         enrollment = self.student.enrollments.get(course=self.course)
         
         self.assertEqual(enrollment.is_complete, False)
+    
+    def testCreateCourse(self):
+        # Test student create
+        with self.assertRaises(ValidationError):
+            Course.objects.create(
+                instructor=self.student,
+                title="Test",
+                description="A TEST"
+            )
+
+        # Test instructor create
+        Course.objects.create(
+                instructor=self.instructor,
+                title="Test",
+                description="A TEST"
+        )

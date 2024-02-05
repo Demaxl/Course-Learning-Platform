@@ -35,9 +35,17 @@ class Course(models.Model):
     def __str__(self) -> str:
         return self.title
     
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+    
     def clean(self) -> None:
         if self.instructor.is_student:
-            raise ValidationError(_("Only Instructors can create courses"))
+            raise ValidationError(
+                {
+                    "instructor":_("Only Instructors can create courses")
+                }
+            )
         
 
 class Enrollment(models.Model):
