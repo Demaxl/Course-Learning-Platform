@@ -1,0 +1,1845 @@
+{
+	"info": {
+		"_postman_id": "299fee9b-e82d-49df-bc9e-aba2eff555f8",
+		"name": "LMS Collection",
+		"description": "API tests for LMS web app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "30332992-299fee9b-e82d-49df-bc9e-aba2eff555f8"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "JWT Access",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6bb8e701-d4cd-4d5d-be54-6cbb2b362e06",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ca191df2-b5e8-4347-a3f2-b109f9411518",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "brian",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Characters12345!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/jwt/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"jwt",
+								"create"
+							]
+						},
+						"description": "This endpoint makes an HTTP POST request to {{BASE_URL}}/auth/jwt/create in order to authenticate and generate a JSON Web Token (JWT). The request should include a form-data body with 'username' and 'password' as text parameters.\n\n### Request Body\n\n- username (text): The username of the user.\n- password (text): The password of the user.\n    \n\n### Response\n\nUpon successful authentication, the server responds with a status code of 200 and a JSON object containing 'refresh' and 'access' tokens.\n\n#### Example Response\n\n``` json\n{\n    \"refresh\": \"\",\n    \"access\": \"\"\n}\n\n ```\n\nAccess token should be used to make authenticated requests by adding it to the header in this form\n\n```\nAuthorization: JWT <access_token>\n\n ```"
+					},
+					"response": [
+						{
+							"id": "26e246be-83af-49b1-a200-666d88242ba9",
+							"name": "Get access token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "Micheal",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Characters12345!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/jwt/create",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"jwt",
+										"create"
+									]
+								},
+								"description": "This endpoint makes an HTTP POST request to {{BASE_URL}}/auth/jwt/create in order to authenticate and generate a JSON Web Token (JWT). The request should include a form-data body with 'username' and 'password' as text parameters.\n\n### Request Body\n\n- username (text): The username of the user.\n- password (text): The password of the user.\n    \n\n### Response\n\nUpon successful authentication, the server responds with a status code of 200 and a JSON object containing 'refresh' and 'access' tokens.\n\n#### Example Response\n\n``` json\n{\n    \"refresh\": \"\",\n    \"access\": \"\"\n}\n\n ```\n\nAccess token should be used to make authenticated requests by adding it to the header in this form\n\n```\nAuthorization: JWT <access_token>\n\n ```"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 14:23:20 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"type": "text"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS",
+									"type": "text"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "483",
+									"type": "text"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"type": "text"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin",
+									"type": "text"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwOTEzMDIwMCwiaWF0IjoxNzA2NTM4MjAwLCJqdGkiOiI4NGQ4NTc4NGUwNjk0ZGJhYmM5MmExZWZiODFhZTc3MCIsInVzZXJfaWQiOjF9.8dBzXHPFEqF-j3V5HEoUj-VlZaNsHUr8O0QGwijHhE4\",\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2NjI0NjAwLCJpYXQiOjE3MDY1MzgyMDAsImp0aSI6Ijk1MTE3OWI0YmRlZjQzZWRhNGUzYjNlYmZhYjAwMmZmIiwidXNlcl9pZCI6MX0.l7w9rlii1x8hMYOiJhl404BA-uJqjDg1myqscfkF3PY\"\n}"
+						},
+						{
+							"id": "ad29d155-a12c-4047-a58c-c15bf38ea0cf",
+							"name": "Invalid login details",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "Micheal",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Characters12345!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/jwt/create",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"jwt",
+										"create"
+									]
+								},
+								"description": "This endpoint makes an HTTP POST request to {{BASE_URL}}/auth/jwt/create in order to authenticate and generate a JSON Web Token (JWT). The request should include a form-data body with 'username' and 'password' as text parameters.\n\n### Request Body\n\n- username (text): The username of the user.\n- password (text): The password of the user.\n    \n\n### Response\n\nUpon successful authentication, the server responds with a status code of 200 and a JSON object containing 'refresh' and 'access' tokens.\n\n#### Example Response\n\n``` json\n{\n    \"refresh\": \"\",\n    \"access\": \"\"\n}\n\n ```\n\nAccess token should be used to make authenticated requests by adding it to the header in this form\n\n```\nAuthorization: JWT <access_token>\n\n ```"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 14:27:33 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "JWT realm=\"api\"",
+									"type": "text"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"type": "text"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS",
+									"type": "text"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63",
+									"type": "text"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"type": "text"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin",
+									"type": "text"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"No active account found with the given credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "JWT Refresh",
+					"id": "3db2a9bb-ab32-4614-abcb-da48f7556296",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "refresh",
+									"value": "{{INSTRUCTOR_REFRESH_TOKEN}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/jwt/refresh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"jwt",
+								"refresh"
+							]
+						},
+						"description": "\nThis endpoint is used to refresh a JSON Web Token (JWT) by sending an HTTP POST request to {{BASE_URL}}/auth/jwt/refresh. The request should include a form-data body with a key \"refresh\" containing the refresh token.\n\n### Request Body\n- refresh (text): The refresh token used to obtain a new access token.\n\n### Response\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing the new access token.\n\n#### Example Response\n```json\n{\n    \"access\": \"new_access_token\"\n}\n```\n"
+					},
+					"response": [
+						{
+							"id": "b967e87c-f062-4bb5-b426-81a57eb81641",
+							"name": "Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "refresh",
+											"value": "{{INSTRUCTOR_REFRESH_TOKEN}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/jwt/refresh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"jwt",
+										"refresh"
+									]
+								},
+								"description": "\nThis endpoint is used to refresh a JSON Web Token (JWT) by sending an HTTP POST request to {{BASE_URL}}/auth/jwt/refresh. The request should include a form-data body with a key \"refresh\" containing the refresh token.\n\n### Request Body\n- refresh (text): The refresh token used to obtain a new access token.\n\n### Response\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing the new access token.\n\n#### Example Response\n```json\n{\n    \"access\": \"new_access_token\"\n}\n```\n"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 14:55:39 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "241"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2NjI2NTM5LCJpYXQiOjE3MDY1Mzk1NTcsImp0aSI6Ijg4OGNiZGZlYmUyMDQ2YTE4YmM1ZDA3YWZlZDcxNTYyIiwidXNlcl9pZCI6MX0.fMtxSKoVuE5PGFjPr5ly-P8dh8i9nXpu6ofanXQGyvk\"\n}"
+						},
+						{
+							"id": "7316c7da-da69-4c0b-b80c-340fea538f6f",
+							"name": "Invalid refresh token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "refresh",
+											"value": "{{INSTRUCTOR_REFRESH_TOKEN}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/jwt/refresh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"jwt",
+										"refresh"
+									]
+								},
+								"description": "\nThis endpoint is used to refresh a JSON Web Token (JWT) by sending an HTTP POST request to {{BASE_URL}}/auth/jwt/refresh. The request should include a form-data body with a key \"refresh\" containing the refresh token.\n\n### Request Body\n- refresh (text): The refresh token used to obtain a new access token.\n\n### Response\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing the new access token.\n\n#### Example Response\n```json\n{\n    \"access\": \"new_access_token\"\n}\n```\n"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 14:56:28 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "JWT realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Token is invalid or expired\",\n    \"code\": \"token_not_valid\"\n}"
+						}
+					]
+				},
+				{
+					"name": "JWT Verify",
+					"id": "1f94d8a2-3427-481a-8d3e-fb7ec6e25fe0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{INSTRUCTOR_TOKEN}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/jwt/verify",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"jwt",
+								"verify"
+							]
+						},
+						"description": "\n    \n### Verify JWT Token\n\nThis endpoint is used to verify the validity of a JWT token.\n\n#### Request\n\nThe request should be made to `{{BASE_URL}}/auth/jwt/verify` using the HTTP POST method. The request body should be of type form-data and contain the following parameter:\n\n- `token` (text): The JWT token to be verified.\n\n#### Response\n\nUpon a successful request, the server will respond with a status code of 200 and a JSON object in the response body.\n\nExample response:\n```json\n{}\n```\n\n"
+					},
+					"response": [
+						{
+							"id": "a295d250-cb32-4e93-bc10-ff936e932d49",
+							"name": "Valid JWT TOKEN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "{{INSTRUCTOR_TOKEN}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/jwt/verify",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"jwt",
+										"verify"
+									]
+								},
+								"description": "\n    \n### Verify JWT Token\n\nThis endpoint is used to verify the validity of a JWT token.\n\n#### Request\n\nThe request should be made to `{{BASE_URL}}/auth/jwt/verify` using the HTTP POST method. The request body should be of type form-data and contain the following parameter:\n\n- `token` (text): The JWT token to be verified.\n\n#### Response\n\nUpon a successful request, the server will respond with a status code of 200 and a JSON object in the response body.\n\nExample response:\n```json\n{}\n```\n\n"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 15:00:43 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"id": "1b8e3a3d-2517-46d1-83e1-23fb15843c5a",
+							"name": "Invalid JWT Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "{{INSTRUCTOR_TOKEN}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/jwt/verify",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"jwt",
+										"verify"
+									]
+								},
+								"description": "\n    \n### Verify JWT Token\n\nThis endpoint is used to verify the validity of a JWT token.\n\n#### Request\n\nThe request should be made to `{{BASE_URL}}/auth/jwt/verify` using the HTTP POST method. The request body should be of type form-data and contain the following parameter:\n\n- `token` (text): The JWT token to be verified.\n\n#### Response\n\nUpon a successful request, the server will respond with a status code of 200 and a JSON object in the response body.\n\nExample response:\n```json\n{}\n```\n\n"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 15:03:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "JWT realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Token is invalid or expired\",\n    \"code\": \"token_not_valid\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create User",
+					"id": "d1812310-73e9-4843-ba0e-0b06a164f818",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "sana2",
+									"description": "username for new user",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"description": "password of new user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								""
+							]
+						},
+						"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST {{BASE_URL}}/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
+					},
+					"response": [
+						{
+							"id": "46664539-0ad9-413e-994f-99e976f1329a",
+							"name": "User already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "sana2",
+											"description": "username for new user",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"description": "password of new user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/users/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"users",
+										""
+									]
+								},
+								"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST {{BASE_URL}}/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 15:24:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": [\n        \"A user with that username already exists.\"\n    ]\n}"
+						},
+						{
+							"id": "d08df1c6-a188-43d2-ac41-3ab46a48fad1",
+							"name": "Weak Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "sana2",
+											"description": "username for new user",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"description": "password of new user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/users/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"users",
+										""
+									]
+								},
+								"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST {{BASE_URL}}/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 29 Jan 2024 15:24:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "151"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"password\": [\n        \"This password is too short. It must contain at least 8 characters.\",\n        \"This password is too common.\",\n        \"This password is entirely numeric.\"\n    ]\n}"
+						},
+						{
+							"id": "3f75b293-c5bd-4304-a677-a30a89110cf8",
+							"name": "Successfull Student Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "sana2",
+											"description": "username for new user",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"description": "password of new user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/users/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"users",
+										""
+									]
+								},
+								"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST {{BASE_URL}}/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 01:11:34 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"\",\n    \"username\": \"hermione\",\n    \"id\": 9\n}"
+						},
+						{
+							"id": "4003c842-3558-4288-b4ff-632536d1d028",
+							"name": "Successfull Instructor Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "sana2",
+											"description": "username for new user",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"description": "password of new user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/users/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"users",
+										""
+									]
+								},
+								"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST {{BASE_URL}}/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 01:12:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"\",\n    \"username\": \"halan\",\n    \"id\": 10\n}"
+						},
+						{
+							"id": "88228dff-1b75-4b5d-8f92-1e0cdd899011",
+							"name": "Invalid Account Type",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "sana2",
+											"description": "username for new user",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"description": "password of new user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/users/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"users",
+										""
+									]
+								},
+								"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST {{BASE_URL}}/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 01:13:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": [\n        \"Invalid account type\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Users List",
+					"id": "e418abcb-60a4-4b04-bb21-2ddf4eb44356",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{STUDENT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/auth/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User Details",
+					"id": "30ee64ca-9b8c-40b4-ab4c-0b0ea14b7dc9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{STUDENT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/auth/users/me",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "84279035-d210-4a68-8bfa-e95322a5b2e0",
+			"description": "User related endpoints"
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Get course list",
+					"id": "6508b445-c381-44a6-80a5-2f9c13e92f31",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "8dbe7bc9-df47-4e21-bb2d-1d317bfb65b3",
+							"name": "Get course detail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:10:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"instructor\": \"Micheal\",\n    \"title\": \"Introduction to Backend Development with python\",\n    \"created_at\": \"2024-01-25T15:59:16.501048+01:00\",\n    \"description\": \"This is an introductory backend course\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Course",
+					"id": "5b0f0884-8299-4190-ae9b-eff98b8a3e73",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT ",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Machine learning for beginners",
+									"description": "Course title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is a course for beginners in Machine Learning",
+									"description": "Description of the course",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "308f1e63-1529-4dc3-8104-cb03834d89f3",
+							"name": "Student tries to create course",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Machine learning for beginners",
+											"description": "Course title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "This is a course for beginners in Machine Learning",
+											"description": "Description of the course",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:00:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Only instructors are allowed\"\n}"
+						},
+						{
+							"id": "1f97e67c-378e-47b4-828f-d127c0e358b5",
+							"name": "Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Machine learning for beginners",
+											"description": "Course title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "This is a course for beginners in Machine Learning",
+											"description": "Description of the course",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:02:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 7,\n    \"instructor\": \"Micheal\",\n    \"title\": \"Machine learning for beginners\",\n    \"created_at\": \"2024-02-04T01:02:38.613247+01:00\",\n    \"description\": \"This is a course for beginners in Machine Learning\"\n}"
+						},
+						{
+							"id": "8fbe55e5-42bd-4d69-89fa-a1f7f0427cd3",
+							"name": "Unauthenticated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Machine learning for beginners",
+											"description": "Course title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "This is a course for beginners in Machine Learning",
+											"description": "Description of the course",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 04 Feb 2024 00:06:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "JWT realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Authentication credentials were not provided.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit course detail",
+					"id": "b6675517-0b33-47ac-aa7f-9b25caa9912a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{INSTRUCTOR_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Introduction to Backend Development with python",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b6e0067a-8e6e-4cbe-af98-1180b3392f74",
+							"name": "Invalid course instructor",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introduction to Backend Development with python",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 05 Feb 2024 15:37:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Only the instructor of this course can edit it\"\n}"
+						},
+						{
+							"id": "374ce421-217f-470c-9c24-32fc21a2082f",
+							"name": "Successfull",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introduction to Backend Development with python",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 05 Feb 2024 15:38:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"instructor\": \"Micheal\",\n    \"title\": \"Introduction to Backend Development with python\",\n    \"created_at\": \"2024-01-25T15:59:16.501048+01:00\",\n    \"description\": \"This is an introductory backend course\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Course",
+					"id": "61393a00-4eff-48b2-abb8-96b499c78f49",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{INSTRUCTOR_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/7",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c077329b-8b83-4c14-b151-285174f38c69",
+			"description": "Requests for course resources"
+		}
+	]
+}
