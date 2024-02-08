@@ -136,6 +136,13 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',  
         'rest_framework.authentication.SessionAuthentication' # TODO Remove
     ),
+    'DEFAULT_FILTER_BACKENDS': [
+        'rest_framework.filters.OrderingFilter',  # ordering
+        'rest_framework.filters.SearchFilter',  # searching
+    ],
+    # Pagination
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3  # TODO Set to 15
 }
 
 SIMPLE_JWT = {
