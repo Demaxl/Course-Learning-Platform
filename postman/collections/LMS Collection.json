@@ -1203,6 +1203,27 @@
 							"path": [
 								"api",
 								"courses"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "backend",
+									"description": "Returns courses that match the title",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "2",
+									"description": "Page number of results",
+									"disabled": true
+								},
+								{
+									"key": "ordering",
+									"value": "created_at",
+									"description": "Returns courses ordered by date, oldest first",
+									"type": "text",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -1840,6 +1861,25 @@
 			],
 			"id": "c077329b-8b83-4c14-b151-285174f38c69",
 			"description": "Requests for course resources"
+		},
+		{
+			"name": "Lessons",
+			"item": [
+				{
+					"name": "Get lessons",
+					"id": "36e8d5fe-9472-4cde-9543-8aa25973f04e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "dab33797-033f-4987-86ed-eae2a7b36cb4",
+			"description": "Lessons related endpoints"
 		}
 	]
 }
