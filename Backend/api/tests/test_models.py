@@ -16,13 +16,13 @@ class CourseTestCase(TestCase):
         cls.lesson1 = Lesson.objects.create(
             course=cls.course,
             title="What is backend",
-            lesson='{"type":"video","url":"asd"}'
+            lesson={"type":"VIDEO","file_path":"path"}
         )
 
         cls.lesson2 = Lesson.objects.create(
             course=cls.course,
             title="What is frontend",
-            lesson='{"type":"text","url":"asd"}'
+            lesson={"type":"READING","content":"hello"}
         )
 
         cls.enrollment = cls.student.enroll(cls.course)
@@ -57,3 +57,75 @@ class CourseTestCase(TestCase):
                 title="Test",
                 description="A TEST"
         )
+    
+    def testLesson(self):
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson={"type":"asd","content":"hello"}
+            )
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson=''
+            )
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson=None
+            )
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson={}
+            )
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson="asd"
+            )
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson={
+                    "type": "READING"
+                }
+            )
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson={
+                    "type": "VIDEO"
+                }
+            )
+        with self.assertRaises(ValidationError):
+            Lesson.objects.create(
+                course=self.course,
+                title="What is frontend",
+                lesson='{"type": "VIDEO", "file_path":"sad"}'
+            )
+            
+        Lesson.objects.create(
+            course=self.course,
+                title="What is frontend2",
+                lesson={
+                    "type": "READING",
+                    "content": "A test reading"
+                }
+            )
+        Lesson.objects.create(
+            course=self.course,
+            title="What is backend2",
+            lesson={
+                    "type": "VIDEO",
+                    "file_path": "asasd"
+            }
+        )
+        

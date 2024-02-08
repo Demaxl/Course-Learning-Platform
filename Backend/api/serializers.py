@@ -57,6 +57,15 @@ class CustomUserSerializer(UserSerializer):
         return "Instructor"
 
 
+
+
+class LessonSerializer(serializers.ModelSerializer):    
+
+    class Meta:
+        model = Lesson
+        fields = '__all__'
+        read_only_fields = ["order", "created_at", "course"]
+
 class CustomUserCreateSerializer(UserCreateSerializer):
     type = serializers.CharField(max_length=15, write_only=True)
 
