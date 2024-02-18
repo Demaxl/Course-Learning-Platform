@@ -48,5 +48,15 @@ class LessonViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         course = get_object_or_404(Course, pk=self.kwargs["course_pk"])
         serializer.save(course=course)
+    
+    # def partial_update(self, request, *args, **kwargs):
+    #     # video = request.data.get('video')
+    #     # print(video.temporary_file_path())
+    #     # print(video.name)
+    #     # with open('test.mp4', 'wb') as destination:
+    #     #     for chunk in video.chunks():
+    #     #         destination.write(chunk)
+    #     # print(request.files)
+    #     return super().partial_update(request, *args, **kwargs)
 
     

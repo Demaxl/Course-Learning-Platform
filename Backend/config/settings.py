@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import sys
+import sys, os
 from datetime import timedelta
 
 from pathlib import Path
@@ -165,3 +165,6 @@ DJOSER = {
     }
 }
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+MEDIA_URL = "/media/"

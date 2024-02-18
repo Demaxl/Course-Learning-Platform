@@ -1,9 +1,10 @@
-import bleach
-
+import bleach, os
+from django.utils.text import slugify
+from django.core.files.storage import FileSystemStorage
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
-from .models import *
+from .models import Course, Enrollment, Lesson, User, Progress, LessonValidator
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -60,11 +61,44 @@ class CustomUserSerializer(UserSerializer):
 
 
 class LessonSerializer(serializers.ModelSerializer):    
+    video = serializers.FileField(write_only=True, use_url=True, required=False)
+    lesson = serializers.JSONField(validators=[LessonValidator(serializer=True)])
 
     class Meta:
         model = Lesson
         fields = '__all__'
         read_only_fields = ["order", "created_at", "course"]
+
+    def validate(self, attrs):
+        if 'lesson' in attrs:
+            if attrs['lesson']['type'] == "VIDEO" and "video" not in attrs:
+                raise serializers.ValidationError({"video":"Video file not uploaded"})
+        return super().validate(attrs)
+
+    def handle_video_file(self, video_file, title):
+        ext = os.path.splitext(video_file.name)[-1]
+        file_name = "video_lessons/" + slugify(title) + ext
+
+        fs = FileSystemStorage()
+        name = fs.save(file_name, video_file)
+
+        return fs.url(name)
+
+
+    def create(self, validated_data):
+        if validated_data['lesson']['type'] == "VIDEO":
+            url = self.handle_video_file(validated_data.pop('video'), validated_data['title'])
+            validated_data['lesson']['file_path'] = url
+
+        return super().create(validated_data)
+    
+    def update(self, instance, validated_data):
+        title = validated_data.get('title', instance.title)
+        if validated_data.get("lesson", False) and validated_data['lesson']['type'] == "VIDEO":
+            url = self.handle_video_file(validated_data['video'], title)
+            validated_data['lesson']['file_path'] = url
+
+        return super().update(instance, validated_data)
 
 class CustomUserCreateSerializer(UserCreateSerializer):
     type = serializers.CharField(max_length=15, write_only=True)
