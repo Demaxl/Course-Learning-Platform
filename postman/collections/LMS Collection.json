@@ -1949,21 +1949,32 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "How the internet works",
+									"value": "Python basics",
 									"description": "The title of the lesson",
 									"type": "text"
 								},
 								{
 									"key": "lesson",
-									"value": "{ \n\"type\":\"READING\",\n\"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n}\n",
-									"description": "JSON specifying the lesson",
+									"value": "{\"type\":\"VIDEO\"}",
+									"description": "JSON specifying a video lesson",
 									"type": "text"
 								},
 								{
-									"key": "created_at",
-									"value": "2",
+									"key": "lesson",
+									"value": "{ \"type\":\"READING\",\n\"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n}\n",
+									"description": "JSON specifying a reading lesson",
 									"type": "text",
 									"disabled": true
+								},
+								{
+									"key": "video",
+									"description": "Video file for video lesson",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"filesNotInWorkingDirectory": [
+										"/D:/Videos/test.mp4"
+									],
+									"src": "/D:/Videos/test.mp4"
 								}
 							]
 						},
@@ -1991,7 +2002,7 @@
 					"response": [
 						{
 							"id": "f5c688e5-48e7-44f6-989c-ef49a7b30baf",
-							"name": "Successfull",
+							"name": "Create Reading lesson",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -2086,8 +2097,156 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"order\": 4,\n    \"created_at\": \"2024-02-16T14:00:35.781463+01:00\",\n    \"title\": \"Backend Developer Salary\",\n    \"lesson\": {\n        \"type\": \"READING\",\n        \"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n    },\n    \"course\": 1\n}"
+						},
+						{
+							"id": "86897893-7bb4-4041-91b7-3fbbe808d749",
+							"name": "Create Video Lesson",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Python basics",
+											"description": "The title of the lesson",
+											"type": "text"
+										},
+										{
+											"key": "lesson",
+											"value": "{\"type\":\"VIDEO\"}",
+											"type": "text"
+										},
+										{
+											"key": "lesson",
+											"value": "{ \"type\":\"READING\",\n\"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n}\n",
+											"description": "JSON specifying the lesson",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "video",
+											"type": "file",
+											"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+											"filesNotInWorkingDirectory": [
+												"/D:/Videos/test.mp4"
+											],
+											"src": [
+												"/D:/Videos/test.mp4"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1/lessons",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1",
+										"lessons"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "why",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 18 Feb 2024 18:56:50 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "181"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"order\": 7,\n    \"lesson\": {\n        \"type\": \"VIDEO\",\n        \"file_path\": \"/media/video_lessons/python-basics_COvVT2o.mp4\"\n    },\n    \"created_at\": \"2024-02-18T19:56:50.149356+01:00\",\n    \"title\": \"Python basics\",\n    \"course\": 1\n}"
 						}
 					]
+				},
+				{
+					"name": "Get Lessons",
+					"id": "3b622db8-1ecc-45a5-829e-5431bab06bde",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{STUDENT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/1/lessons",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1",
+								"lessons"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "Edit Lesson",
@@ -2117,19 +2276,40 @@
 							"mode": "formdata",
 							"formdata": [
 								{
+									"key": "video",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"filesNotInWorkingDirectory": [
+										"/D:/Videos/test.mp4"
+									],
+									"src": "/D:/Videos/test.mp4"
+								},
+								{
 									"key": "title",
 									"value": "Proper Definition of backend development",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lesson",
+									"value": "{\"type\":\"VIDEO\"}",
 									"type": "text"
 								},
 								{
 									"key": "lesson",
-									"value": "{\"type\":\"VIDEO\", \"file_path\":\"\"}",
-									"type": "text"
+									"value": "{\"type\":\"READING\", \"content\":\"hello bro\"}",
+									"type": "text",
+									"disabled": true
 								}
-							]
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/courses/1/lessons",
+							"raw": "{{BASE_URL}}/api/courses/1/lessons/1",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -2137,7 +2317,8 @@
 								"api",
 								"courses",
 								"1",
-								"lessons"
+								"lessons",
+								"1"
 							]
 						}
 					},
@@ -2186,45 +2367,6 @@
 			],
 			"id": "dab33797-033f-4987-86ed-eae2a7b36cb4",
 			"description": "Lessons related endpoints"
-		},
-		{
-			"name": "Get Lessons",
-			"id": "3b622db8-1ecc-45a5-829e-5431bab06bde",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "value",
-							"value": "JWT {{STUDENT_TOKEN}}",
-							"type": "string"
-						},
-						{
-							"key": "key",
-							"value": "Authorization",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/api/courses/1/lessons",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"courses",
-						"1",
-						"lessons"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
