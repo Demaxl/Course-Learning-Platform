@@ -37,7 +37,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "brian",
+									"value": "ron",
 									"type": "text"
 								},
 								{
@@ -83,17 +83,22 @@
 									]
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/auth/jwt/create",
+									"raw": "http://127.0.0.1:8000/auth/jwt/create",
+									"protocol": "http",
 									"host": [
-										"{{BASE_URL}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "8000",
 									"path": [
 										"auth",
 										"jwt",
 										"create"
 									]
 								},
-								"description": "This endpoint makes an HTTP POST request to {{BASE_URL}}/auth/jwt/create in order to authenticate and generate a JSON Web Token (JWT). The request should include a form-data body with 'username' and 'password' as text parameters.\n\n### Request Body\n\n- username (text): The username of the user.\n- password (text): The password of the user.\n    \n\n### Response\n\nUpon successful authentication, the server responds with a status code of 200 and a JSON object containing 'refresh' and 'access' tokens.\n\n#### Example Response\n\n``` json\n{\n    \"refresh\": \"\",\n    \"access\": \"\"\n}\n\n ```\n\nAccess token should be used to make authenticated requests by adding it to the header in this form\n\n```\nAuthorization: JWT <access_token>\n\n ```"
+								"description": "This endpoint makes an HTTP POST request to http://127.0.0.1:8000/auth/jwt/create in order to authenticate and generate a JSON Web Token (JWT). The request should include a form-data body with 'username' and 'password' as text parameters.\n\n### Request Body\n\n- username (text): The username of the user.\n- password (text): The password of the user.\n    \n\n### Response\n\nUpon successful authentication, the server responds with a status code of 200 and a JSON object containing 'refresh' and 'access' tokens.\n\n#### Example Response\n\n``` json\n{\n    \"refresh\": \"\",\n    \"access\": \"\"\n}\n\n ```\n\nAccess token should be used to make authenticated requests by adding it to the header in this form\n\n```\nAuthorization: JWT <access_token>\n\n ```"
 							},
 							"status": "OK",
 							"code": 200,
@@ -296,23 +301,28 @@
 									"formdata": [
 										{
 											"key": "refresh",
-											"value": "{{INSTRUCTOR_REFRESH_TOKEN}}",
+											"value": "",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/auth/jwt/refresh",
+									"raw": "http://127.0.0.1:8000/auth/jwt/refresh",
+									"protocol": "http",
 									"host": [
-										"{{BASE_URL}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "8000",
 									"path": [
 										"auth",
 										"jwt",
 										"refresh"
 									]
 								},
-								"description": "\nThis endpoint is used to refresh a JSON Web Token (JWT) by sending an HTTP POST request to {{BASE_URL}}/auth/jwt/refresh. The request should include a form-data body with a key \"refresh\" containing the refresh token.\n\n### Request Body\n- refresh (text): The refresh token used to obtain a new access token.\n\n### Response\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing the new access token.\n\n#### Example Response\n```json\n{\n    \"access\": \"new_access_token\"\n}\n```\n"
+								"description": "\nThis endpoint is used to refresh a JSON Web Token (JWT) by sending an HTTP POST request to http://127.0.0.1:8000/auth/jwt/refresh. The request should include a form-data body with a key \"refresh\" containing the refresh token.\n\n### Request Body\n- refresh (text): The refresh token used to obtain a new access token.\n\n### Response\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing the new access token.\n\n#### Example Response\n```json\n{\n    \"access\": \"new_access_token\"\n}\n```\n"
 							},
 							"status": "OK",
 							"code": 200,
@@ -489,23 +499,28 @@
 									"formdata": [
 										{
 											"key": "token",
-											"value": "{{INSTRUCTOR_TOKEN}}",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5NDY3MzM0LCJpYXQiOjE3MDY1Mzk2MDMsImp0aSI6IjZjYzBhODVhNzA0...",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/auth/jwt/verify",
+									"raw": "http://127.0.0.1:8000/auth/jwt/verify",
+									"protocol": "http",
 									"host": [
-										"{{BASE_URL}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "8000",
 									"path": [
 										"auth",
 										"jwt",
 										"verify"
 									]
 								},
-								"description": "\n    \n### Verify JWT Token\n\nThis endpoint is used to verify the validity of a JWT token.\n\n#### Request\n\nThe request should be made to `{{BASE_URL}}/auth/jwt/verify` using the HTTP POST method. The request body should be of type form-data and contain the following parameter:\n\n- `token` (text): The JWT token to be verified.\n\n#### Response\n\nUpon a successful request, the server will respond with a status code of 200 and a JSON object in the response body.\n\nExample response:\n```json\n{}\n```\n\n"
+								"description": "\n    \n### Verify JWT Token\n\nThis endpoint is used to verify the validity of a JWT token.\n\n#### Request\n\nThe request should be made to `http://127.0.0.1:8000/auth/jwt/verify` using the HTTP POST method. The request body should be of type form-data and contain the following parameter:\n\n- `token` (text): The JWT token to be verified.\n\n#### Response\n\nUpon a successful request, the server will respond with a status code of 200 and a JSON object in the response body.\n\nExample response:\n```json\n{}\n```\n\n"
 							},
 							"status": "OK",
 							"code": 200,
@@ -646,7 +661,19 @@
 					},
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -705,17 +732,22 @@
 									]
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/auth/users/",
+									"raw": "http://127.0.0.1:8000/auth/users/",
+									"protocol": "http",
 									"host": [
-										"{{BASE_URL}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "8000",
 									"path": [
 										"auth",
 										"users",
 										""
 									]
 								},
-								"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST {{BASE_URL}}/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
+								"description": "### Create New User\n\nThis endpoint allows you to create a new user by providing a username and password.\n\n**HTTP Request**  \n`POST http://127.0.0.1:8000/auth/users/`\n\n**Parameters**\n\n- `username` (text, required) - The username for the new user.\n- `password` (text, required) - The password of the new user.\n    \n\n**Response**\n\n- Status: 400\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n          {\n            \"email\": \"\",\n            \"username\": \"sana\",\n            \"id\": 4\n          }\n    \n     ```\n    \n\n**Example Response**\n\n``` json\n{\n    \"email\": \"\",\n    \"username\": \"sana\",\n    \"id\": 4\n}\n\n ```"
 							},
 							"status": "Bad Request",
 							"code": 400,
@@ -1153,7 +1185,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "JWT {{STUDENT_TOKEN}}",
+									"value": "JWT {{STUDENT2_TOKEN}}",
 									"type": "string"
 								},
 								{
@@ -1196,13 +1228,42 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/courses",
+							"raw": "{{BASE_URL}}/api/courses/2345",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
-								"courses"
+								"courses",
+								"2345"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "backend",
+									"description": "Returns courses that match the title",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number of results",
+									"disabled": true
+								},
+								{
+									"key": "ordering",
+									"value": "created_at",
+									"description": "Returns courses ordered by date, oldest first",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "2",
+									"description": "Number of items per page",
+									"type": "text",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -1214,10 +1275,15 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{BASE_URL}}/api/courses/1",
+									"raw": "http://127.0.0.1:8000/api/courses/1",
+									"protocol": "http",
 									"host": [
-										"{{BASE_URL}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "8000",
 									"path": [
 										"api",
 										"courses",
@@ -1352,10 +1418,15 @@
 									]
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/api/courses",
+									"raw": "http://127.0.0.1:8000/api/courses",
+									"protocol": "http",
 									"host": [
-										"{{BASE_URL}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "8000",
 									"path": [
 										"api",
 										"courses"
@@ -1656,10 +1727,15 @@
 									]
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/api/courses/1",
+									"raw": "http://127.0.0.1:8000/api/courses/1",
+									"protocol": "http",
 									"host": [
-										"{{BASE_URL}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "8000",
 									"path": [
 										"api",
 										"courses",
@@ -1840,6 +1916,315 @@
 			],
 			"id": "c077329b-8b83-4c14-b151-285174f38c69",
 			"description": "Requests for course resources"
+		},
+		{
+			"name": "Lessons",
+			"item": [
+				{
+					"name": "Create Lesson",
+					"id": "36e8d5fe-9472-4cde-9543-8aa25973f04e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{INSTRUCTOR_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "How the internet works",
+									"description": "The title of the lesson",
+									"type": "text"
+								},
+								{
+									"key": "lesson",
+									"value": "{ \n\"type\":\"READING\",\n\"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n}\n",
+									"description": "JSON specifying the lesson",
+									"type": "text"
+								},
+								{
+									"key": "created_at",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/1/lessons",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1",
+								"lessons"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "why",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "f5c688e5-48e7-44f6-989c-ef49a7b30baf",
+							"name": "Successfull",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Backend Developer Salary",
+											"description": "The title of the lesson",
+											"type": "text"
+										},
+										{
+											"key": "lesson",
+											"value": "{ \n\"type\":\"READING\",\n\"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n}\n",
+											"description": "JSON specifying the lesson",
+											"type": "text"
+										},
+										{
+											"key": "created_at",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/courses/1/lessons",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										"1",
+										"lessons"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "why",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 16 Feb 2024 13:00:35 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "199"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"order\": 4,\n    \"created_at\": \"2024-02-16T14:00:35.781463+01:00\",\n    \"title\": \"Backend Developer Salary\",\n    \"lesson\": {\n        \"type\": \"READING\",\n        \"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n    },\n    \"course\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Lesson",
+					"id": "0077464f-0c14-4fe3-8adb-448cba865e84",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{INSTRUCTOR_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Proper Definition of backend development",
+									"type": "text"
+								},
+								{
+									"key": "lesson",
+									"value": "{\"type\":\"VIDEO\", \"file_path\":\"\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/1/lessons",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1",
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete lesson",
+					"id": "db5f1316-1d30-4e07-be34-b96d1ff94a86",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{INSTRUCTOR_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/1/lessons/5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1",
+								"lessons",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "dab33797-033f-4987-86ed-eae2a7b36cb4",
+			"description": "Lessons related endpoints"
+		},
+		{
+			"name": "Get Lessons",
+			"id": "3b622db8-1ecc-45a5-829e-5431bab06bde",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "JWT {{STUDENT_TOKEN}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/courses/1/lessons",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"1",
+						"lessons"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
