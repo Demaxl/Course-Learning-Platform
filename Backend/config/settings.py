@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import sys, os
 from datetime import timedelta
 
 from pathlib import Path
@@ -131,6 +132,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "api.User"
 
 
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+    
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',  
@@ -140,9 +147,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',  # ordering
         'rest_framework.filters.SearchFilter',  # searching
     ],
-    # Pagination
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 3  # TODO Set to 15
+    'EXCEPTION_HANDLER': 'api.utils.exception_handler',
 }
 
 SIMPLE_JWT = {
@@ -160,3 +165,6 @@ DJOSER = {
     }
 }
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+MEDIA_URL = "/media/"

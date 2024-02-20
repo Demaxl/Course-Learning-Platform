@@ -4,8 +4,49 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
 from django.db.models import UniqueConstraint
+from django.utils.deconstruct import deconstructible
 
-# Create your models here.
+@deconstructible
+class LessonValidator(object):
+    def __init__(self, serializer=False):
+        self.serializer = serializer
+
+    def __call__(self, lesson):
+        if lesson is None:
+            raise ValidationError([{
+                        "lesson": _("Lesson can not be null")
+                    }])
+        if not isinstance(lesson, dict):
+            raise ValidationError([{
+                        "lesson": _("Invalid JSON")
+                }])
+        
+        if "type" not in lesson:
+            raise ValidationError([{
+                "lesson": _("Lesson must specify type")
+            }])
+
+        
+        match lesson['type']:
+            case "READING":
+                if "content" not in lesson:
+                    raise ValidationError([{
+                        "lesson": _("Reading lesson should have a 'content' field")
+                    }])
+            case 'VIDEO':
+                if not self.serializer and 'file_path' not in lesson:
+                    raise ValidationError([{
+                        'lesson': _("Video lessons must have a 'file_path' field")
+                    }])
+            
+            case _:
+                raise ValidationError([{
+                    "lesson": _("Lesson can only be of type 'READING' or 'VIDEO'")
+                }])
+
+    
+
+
 
 class User(AbstractUser):
     is_student = models.BooleanField(default=True)
@@ -14,8 +55,11 @@ class User(AbstractUser):
         return Enrollment.objects.create(
             student=self,
             course=course)
+
+    def isEnrolled(self, course):
+        return course.students.contains(self)
     
-    def unenroll(self, course: 'Course'):
+    def unEnroll(self, course: 'Course'):
         course.students.remove(self)
 
 
@@ -59,6 +103,10 @@ class Enrollment(models.Model):
     def __str__(self) -> str:
         return f"{self.student} enrolled in {self.course}"
 
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
     def clean(self):
         if not self.student.is_student:
             raise ValidationError(_("Only students can enroll in courses"))
@@ -77,7 +125,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
     created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, unique=True)
-    lesson = models.JSONField()
+    lesson = models.JSONField(null=False, validators=[LessonValidator()])
     
     class Meta:
         get_latest_by = "pk"
@@ -85,6 +133,10 @@ class Lesson(models.Model):
     def __str__(self) -> str:
         return self.title
     
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+ 
     def complete(self, student: User):
         Progress.objects.create(student=student, course=self.course, lesson=self)
     
@@ -104,6 +156,10 @@ class Progress(models.Model):
     
     def getEnrollment(self) -> Enrollment:
         return self.student.enrollments.get(course=self.course)
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def clean(self):
         if not self.course.students.contains(self.student):
