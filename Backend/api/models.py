@@ -124,11 +124,14 @@ class Lesson(models.Model):
     order = models.SmallAutoField(editable=False, primary_key=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
     created_at = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100)
     lesson = models.JSONField(null=False, validators=[LessonValidator()])
     
     class Meta:
         get_latest_by = "pk"
+        constraints = [
+            UniqueConstraint(fields=["course", "title"], name="unique_lesson_title")
+        ]
 
     def __str__(self) -> str:
         return self.title

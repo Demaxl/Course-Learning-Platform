@@ -2,7 +2,7 @@ from rest_framework import permissions
 from .models import Course, Lesson
 from django.shortcuts import get_object_or_404
 
-class IsInstructor(permissions.IsAuthenticated):
+class IsInstructorOrReadOnly(permissions.IsAuthenticated):
     message = "Only instructors are allowed"
 
     def has_permission(self, request, view):
@@ -20,7 +20,15 @@ class IsInstructor(permissions.IsAuthenticated):
         
         self.message = "Only the instructor of this course can edit it"
         return request.user == obj.instructor
-    
+
+class IsStudent(permissions.IsAuthenticated):
+    message = "Only Students are allowed"
+
+    def has_permission(self, request, view):
+        if not super().has_permission(request, view):
+            return False
+        
+        return request.user.is_student
 
 class IsEnrolledOrInstructor(permissions.IsAuthenticated):
     message = "Only enrolled students or the instructor of this course can view its lessons"

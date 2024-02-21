@@ -87,6 +87,14 @@ class CourseViewsTest(APITestCase):
         self.assertEqual(r.status_code, 403)
         # print(self.client.get("/api/courses").content)
 
+    def testEnrollments(self):
+        self.setCredentials(self.instructorJWT)
+        r = self.client.post("/api/courses/1/enroll")
+        self.assertEqual(r.status_code, 403)
+
+        self.setCredentials(self.studentJWT)
+        r = self.client.post("/api/courses/1/enroll")
+        self.assertEqual(r.status_code, 201)
 
 
 class LessonViewsTest(CourseViewsTest):

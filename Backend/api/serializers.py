@@ -17,13 +17,14 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class EnrollmentSerializer(serializers.ModelSerializer):
+    enrollment_id = serializers.IntegerField(source="pk")
     total_lessons = serializers.SerializerMethodField()
     completed_lessons = serializers.SerializerMethodField()
     course = serializers.StringRelatedField()
 
     class Meta:
         model = Enrollment
-        fields = ["id", "course", "is_complete", "completed_lessons", "total_lessons"]
+        fields = ["enrollment_id", "course_id", "course", "is_complete", "completed_lessons", "total_lessons"]
     
 
     def get_total_lessons(self, enrollment: Enrollment):
