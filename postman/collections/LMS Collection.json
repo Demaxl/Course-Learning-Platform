@@ -1228,14 +1228,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/courses/2345",
+							"raw": "{{BASE_URL}}/api/courses",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
-								"courses",
-								"2345"
+								"courses"
 							],
 							"query": [
 								{
@@ -1949,7 +1948,7 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Python basics",
+									"value": "Who developed graphql",
 									"description": "The title of the lesson",
 									"type": "text"
 								},
@@ -1957,14 +1956,14 @@
 									"key": "lesson",
 									"value": "{\"type\":\"VIDEO\"}",
 									"description": "JSON specifying a video lesson",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "lesson",
-									"value": "{ \"type\":\"READING\",\n\"content\": \"<h1>The average backend developer makes $100,000</h1>\"\n}\n",
+									"value": "{ \"type\":\"READING\",\n\"content\": \"<h1>It was made my Meta</h1>\"\n}\n",
 									"description": "JSON specifying a reading lesson",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "video",
@@ -1974,7 +1973,8 @@
 									"filesNotInWorkingDirectory": [
 										"/D:/Videos/test.mp4"
 									],
-									"src": "/D:/Videos/test.mp4"
+									"src": "/D:/Videos/test.mp4",
+									"disabled": true
 								}
 							]
 						},
@@ -2234,14 +2234,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/courses/1/lessons",
+							"raw": "{{BASE_URL}}/api/courses/3/lessons",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"courses",
-								"1",
+								"3",
 								"lessons"
 							]
 						}
@@ -2367,6 +2367,128 @@
 			],
 			"id": "dab33797-033f-4987-86ed-eae2a7b36cb4",
 			"description": "Lessons related endpoints"
+		},
+		{
+			"name": "Enrollments",
+			"item": [
+				{
+					"name": "Get User Enrollments",
+					"id": "7d443915-a266-4e4a-83ed-34d066076047",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{STUDENT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/auth/users/me",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll in course",
+					"id": "907a5fa0-8cee-4ab8-bbdd-fd178c054cf0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{STUDENT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/3/enroll",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"3",
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unenroll a course",
+					"id": "ea18fdb3-0da5-4517-a1da-caa99a094a25",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{STUDENT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/3/unenroll",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"3",
+								"unenroll"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "736057ab-0a05-4811-b393-ef95a1e73d89"
 		}
 	]
 }
