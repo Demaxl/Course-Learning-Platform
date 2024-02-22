@@ -141,8 +141,15 @@ class Lesson(models.Model):
         super().save(*args, **kwargs)
  
     def complete(self, student: User):
-        Progress.objects.create(student=student, course=self.course, lesson=self)
+        try:
+            Progress.objects.create(student=student, course=self.course, lesson=self)
+        except: pass
     
+    def uncomplete(self, student: User):
+        try:
+            Progress.objects.get(student=student, course=self.course, lesson=self).delete()
+        except Progress.DoesNotExist:
+            pass
 
 class Progress(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name="progress")

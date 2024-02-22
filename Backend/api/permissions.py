@@ -22,6 +22,7 @@ class IsInstructorOrReadOnly(permissions.IsAuthenticated):
         return request.user == obj.instructor
 
 class IsStudent(permissions.IsAuthenticated):
+
     message = "Only Students are allowed"
 
     def has_permission(self, request, view):
@@ -46,7 +47,6 @@ class IsEnrolledOrInstructor(permissions.IsAuthenticated):
         return request.user.isEnrolled(course) or request.user == course.instructor     
         
        
-
     def has_object_permission(self, request, view, obj):
         if request.method not in permissions.SAFE_METHODS:
             self.message = "Only the instructor of this course can edit its lessons"

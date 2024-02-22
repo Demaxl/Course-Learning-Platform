@@ -71,5 +71,28 @@ class LessonViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         course = get_object_or_404(Course, pk=self.kwargs["course_pk"])
         serializer.save(course=course)
+    
+    
 
+    @action(detail=True, methods=['post'], permission_classes=[IsStudent])
+    def completion(self, request, *args, **kwargs):
+        lesson = self.get_object()
+        action = request.data.get('status', 'complete')
+        student = request.user
+
+        if action not in ['complete', 'uncomplete']:
+            return Response({"status":"Status should be 'complete' or 'uncomplete'"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not student.isEnrolled(lesson.course):
+            return Response({"error":"Only enrolled students are allowed"}, status=status.HTTP_403_FORBIDDEN)
+
+        match action:
+            case 'complete':
+                lesson.complete(student)
+                msg = 'completed'
+            case 'uncomplete':
+                lesson.uncomplete(student)
+                msg = 'uncompleted'
+
+        return Response({"ok":True, 'status':msg})
 
