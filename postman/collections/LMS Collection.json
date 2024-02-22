@@ -37,7 +37,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "ron",
+									"value": "david",
 									"type": "text"
 								},
 								{
@@ -2234,14 +2234,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/courses/3/lessons",
+							"raw": "{{BASE_URL}}/api/courses/1/lessons",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"courses",
-								"3",
+								"1",
 								"lessons"
 							]
 						}
@@ -2359,6 +2359,57 @@
 								"1",
 								"lessons",
 								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete Lesson",
+					"id": "8e30c610-fc1f-4859-9d7d-a9521e003df7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "JWT {{STUDENT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "complete",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/courses/1/lessons/1/completion",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1",
+								"lessons",
+								"1",
+								"completion"
 							]
 						}
 					},
